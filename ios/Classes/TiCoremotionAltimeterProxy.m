@@ -22,15 +22,25 @@
   return NUMBOOL(YES);
 }
 
+#if IS_XCODE_9
 - (NSNumber *)authorizationStatus:(id)unused
 {
-  return NUMINT([CMAltimeter authorizationStatus]);
+  if (@available(iOS 11_0, *)) {
+    return NUMINT([CMAltimeter authorizationStatus]);
+  } else {
+    return NUMINT(-1);
+  }
 }
 
 - (NSNumber *)hasAltimeterPermissions:(id)unused
 {
-  return NUMBOOL([CMAltimeter authorizationStatus] == CMAuthorizationStatusAuthorized);
+  if (@available(iOS 11_0, *)) {
+    return NUMBOOL([CMAltimeter authorizationStatus] == CMAuthorizationStatusAuthorized);
+  } else {
+    return NUMINT(NO);
+  }
 }
+#endif
 
 - (NSNumber *)isRelativeAltitudeAvailable:(id)unused
 {

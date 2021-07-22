@@ -1,22 +1,22 @@
-if (Ti.Platform.osname != "iphone" && Ti.Platform.osname != "ipad") {
-	alert("Ti.CoreMotion is iOS only!");
+if (Ti.Platform.osname !== 'iphone' && Ti.Platform.osname !== 'ipad') {
+	alert('Ti.CoreMotion is iOS only!');
 }
 
-var CoreMotion = require('ti.coremotion');
+const CoreMotion = require('ti.coremotion');
 
-var accelerometer = CoreMotion.createAccelerometer();
-var gyroscope = CoreMotion.createGyroscope();
-var magnetometer = CoreMotion.createMagnetometer();
-var deviceMotion = CoreMotion.createDeviceMotion();
-var motionActivity = CoreMotion.createMotionActivity();
-var pedometer = CoreMotion.createPedometer();
+const accelerometer = CoreMotion.createAccelerometer();
+const gyroscope = CoreMotion.createGyroscope();
+const magnetometer = CoreMotion.createMagnetometer();
+const deviceMotion = CoreMotion.createDeviceMotion();
+const motionActivity = CoreMotion.createMotionActivity();
+const pedometer = CoreMotion.createPedometer();
 
-var table = Ti.UI.createTableView({
-	height : '60%',
-	bottom : 0
+const table = Ti.UI.createTableView({
+	height: '60%',
+	bottom: 0
 });
 
-table.addEventListener("click", function(e) {
+table.addEventListener('click', (e) => {
 	if (e.row.onClick) {
 		e.row.onClick();
 	}
@@ -25,17 +25,17 @@ table.addEventListener("click", function(e) {
 ////////////////////////////////////////////////////////
 // Tests as Table View Rows
 ////////////////////////////////////////////////////////
-var data = [{
-	title : "Accelerometer",
-	items : [{
-		title : 'setAccelerometerUpdateInterval(1000)',
-		onClick : function() {
+const data = [ {
+	title: 'Accelerometer',
+	items: [ {
+		title: 'setAccelerometerUpdateInterval(1000)',
+		onClick: () => {
 			logInApp('setAccelerometerUpdateInterval(1000)');
-			accelerometer.setAccelerometerUpdateInterval(1000);
+			accelerometer.accelerometerUpdateInterval = 1000;
 		}
 	}, {
-		title : 'startAccelerometerUpdates(cb)',
-		onClick : function() {
+		title: 'startAccelerometerUpdates(cb)',
+		onClick: () => {
 			logInApp('startAccelerometerUpdates: see device log');
 			accelerometer.startAccelerometerUpdates(function(e) {
 				if (!e.success) {
@@ -46,45 +46,45 @@ var data = [{
 			});
 		}
 	}, {
-		title : 'startAccelerometerUpdates',
-		onClick : function() {
+		title: 'startAccelerometerUpdates',
+		onClick: () => {
 			logInApp('startAccelerometerUpdates');
 			accelerometer.startAccelerometerUpdates();
 		}
 	}, {
-		title : 'stopAccelerometerUpdates',
-		onClick : function() {
+		title: 'stopAccelerometerUpdates',
+		onClick: () => {
 			logInApp('stopAccelerometerUpdates');
 			accelerometer.stopAccelerometerUpdates();
 		}
 	}, {
-		title : 'isAccelerometerActive',
-		onClick : function() {
+		title: 'isAccelerometerActive',
+		onClick: () => {
 			logInApp('isAccelerometerActive: ' + accelerometer.isAccelerometerActive());
 		}
 	}, {
-		title : 'isAccelerometerAvailable',
-		onClick : function() {
+		title: 'isAccelerometerAvailable',
+		onClick: () => {
 			logInApp('isAccelerometerAvailable: ' + accelerometer.isAccelerometerAvailable());
 		}
 	}, {
-		title : 'getAccelerometerData',
-		onClick : function() {
-			var data = accelerometer.getAccelerometerData();
+		title: 'getAccelerometerData',
+		onClick: () => {
+			const data = accelerometer.getAccelerometerData();
 			logInApp('getAccelerometerData: ' + stringifyAxes(data.acceleration) + ' timestamp: ' + data.timestamp);
 		}
-	}]
+	} ]
 }, {
-	title : "Gyroscope",
-	items : [{
-		title : 'setGyroUpdateInterval(1000)',
-		onClick : function() {
+	title: 'Gyroscope',
+	items: [ {
+		title: 'setGyroUpdateInterval(1000)',
+		onClick: () => {
 			logInApp('setGyroUpdateInterval(1000)');
-			gyroscope.setGyroUpdateInterval(1000);
+			gyroscope.gyroUpdateInterval = 1000;
 		}
 	}, {
-		title : 'startGyroUpdates(cb)',
-		onClick : function() {
+		title: 'startGyroUpdates(cb)',
+		onClick: () => {
 			logInApp('startGyroUpdates: see device log');
 			gyroscope.startGyroUpdates(function(e) {
 				if (!e.success) {
@@ -95,45 +95,45 @@ var data = [{
 			});
 		}
 	}, {
-		title : 'startGyroUpdates',
-		onClick : function() {
+		title: 'startGyroUpdates',
+		onClick: () => {
 			logInApp('startGyroUpdates');
 			gyroscope.startGyroUpdates();
 		}
 	}, {
-		title : 'stopGyroUpdates',
-		onClick : function() {
+		title: 'stopGyroUpdates',
+		onClick: () => {
 			logInApp('stopGyroUpdates');
 			gyroscope.stopGyroUpdates();
 		}
 	}, {
-		title : 'isGyroActive',
-		onClick : function() {
+		title: 'isGyroActive',
+		onClick: () => {
 			logInApp('isGyroActive: ' + gyroscope.isGyroActive());
 		}
 	}, {
-		title : 'isGyroAvailable',
-		onClick : function() {
+		title: 'isGyroAvailable',
+		onClick: () => {
 			logInApp('isGyroAvailable: ' + gyroscope.isGyroAvailable());
 		}
 	}, {
-		title : 'getGyroData',
-		onClick : function() {
-			var gyroData = gyroscope.getGyroData();
+		title: 'getGyroData',
+		onClick: () => {
+			const gyroData = gyroscope.getGyroData();
 			logInApp('getGyroData: ' + stringifyAxes(gyroData.rotationRate) + ' timestamp: ' + gyroData.timestamp);
 		}
-	}]
+	} ]
 }, {
-	title : "Magnetometer",
-	items : [{
-		title : 'setMagnetometerUpdateInterval(1000)',
-		onClick : function() {
+	title: 'Magnetometer',
+	items: [ {
+		title: 'setMagnetometerUpdateInterval(1000)',
+		onClick: () => {
 			logInApp('setMagnetometerUpdateInterval(1000)');
-			magnetometer.setMagnetometerUpdateInterval(1000);
+			magnetometer.magnetometerUpdateInterval = 1000;
 		}
 	}, {
-		title : 'startMagnetometerUpdates(cb)',
-		onClick : function() {
+		title: 'startMagnetometerUpdates(cb)',
+		onClick: () => {
 			logInApp('startMagnetometerUpdates: see device log');
 			magnetometer.startMagnetometerUpdates(function(e) {
 				if (!e.success) {
@@ -144,54 +144,54 @@ var data = [{
 			});
 		}
 	}, {
-		title : 'startMagnetometerUpdates',
-		onClick : function() {
+		title: 'startMagnetometerUpdates',
+		onClick: () => {
 			logInApp('startMagnetometerUpdates');
 			magnetometer.startMagnetometerUpdates();
 		}
 	}, {
-		title : 'stopMagnetometerUpdates',
-		onClick : function() {
+		title: 'stopMagnetometerUpdates',
+		onClick: () => {
 			logInApp('stopMagnetometerUpdates');
 			magnetometer.stopMagnetometerUpdates();
 		}
 	}, {
-		title : 'isMagnetometerActive',
-		onClick : function() {
+		title: 'isMagnetometerActive',
+		onClick: () => {
 			logInApp('isMagnetometerActive: ' + magnetometer.isMagnetometerActive());
 		}
 	}, {
-		title : 'isMagnetometerAvailable',
-		onClick : function() {
+		title: 'isMagnetometerAvailable',
+		onClick: () => {
 			logInApp('isMagnetometerAvailable: ' + magnetometer.isMagnetometerAvailable());
 		}
 	}, {
-		title : 'getMagnetometerData',
-		onClick : function() {
-			var data = magnetometer.getMagnetometerData();
+		title: 'getMagnetometerData',
+		onClick: () => {
+			const data = magnetometer.getMagnetometerData();
 			logInApp('getMagnetometerData: ' + stringifyAxes(data.magneticField) + ' timestamp: ' + data.timestamp);
 		}
-	}]
+	} ]
 }, {
-	title : "Device Motion",
-	items : [{
-		title : 'setShowsDeviceMovementDisplay(true)',
-		onClick : function() {
+	title: 'Device Motion',
+	items: [ {
+		title: 'setShowsDeviceMovementDisplay(true)',
+		onClick: () => {
 			logInApp('setShowsDeviceMovementDisplay');
-			deviceMotion.setShowsDeviceMovementDisplay(true);
+			deviceMotion.showsDeviceMovementDisplay = true;
 		}
 	}, {
-		title : 'setDeviceMotionUpdateInterval(1000)',
-		onClick : function() {
+		title: 'setDeviceMotionUpdateInterval(1000)',
+		onClick: () => {
 			logInApp('setDeviceMotionUpdateInterval(1000)');
-			deviceMotion.setDeviceMotionUpdateInterval(1000);
+			deviceMotion.deviceMotionUpdateInterval = 1000;
 		}
 	}, {
-		title : 'startDeviceMo...Frame(ref,cb)',
-		onClick : function() {
+		title: 'startDeviceMo...Frame(ref,cb)',
+		onClick: () => {
 			logInApp('startDeviceMotionUpdatesUsingReferenceFrame: see device log');
 			deviceMotion.startDeviceMotionUpdatesUsingReferenceFrame({
-				referenceFrame : CoreMotion.ATTITUDE_REFERENCE_FRAME_X_TRUE_NORTH_Z_VERTICAL
+				referenceFrame: CoreMotion.ATTITUDE_REFERENCE_FRAME_X_TRUE_NORTH_Z_VERTICAL
 			}, function(e) {
 				if (!e.success) {
 					logInApp(stringifyError(e));
@@ -201,16 +201,16 @@ var data = [{
 			});
 		}
 	}, {
-		title : 'startDeviceMo...Frame',
-		onClick : function() {
+		title: 'startDeviceMo...Frame',
+		onClick: () => {
 			logInApp('startDeviceMotionUpdatesUsingReferenceFrame');
 			deviceMotion.startDeviceMotionUpdatesUsingReferenceFrame({
-				referenceFrame : CoreMotion.ATTITUDE_REFERENCE_FRAME_X_TRUE_NORTH_Z_VERTICAL
+				referenceFrame: CoreMotion.ATTITUDE_REFERENCE_FRAME_X_TRUE_NORTH_Z_VERTICAL
 			});
 		}
 	}, {
-		title : 'startDeviceMotionUpdates(cb)',
-		onClick : function() {
+		title: 'startDeviceMotionUpdates(cb)',
+		onClick: () => {
 			logInApp('startDeviceMotionUpdates: see device log');
 			deviceMotion.startDeviceMotionUpdates(function(e) {
 				if (!e.success) {
@@ -221,25 +221,25 @@ var data = [{
 			});
 		}
 	}, {
-		title : 'startDeviceMotionUpdates',
-		onClick : function() {
+		title: 'startDeviceMotionUpdates',
+		onClick: () => {
 			logInApp('startDeviceMotionUpdates');
 			deviceMotion.startDeviceMotionUpdates();
 		}
 	}, {
-		title : 'stopDeviceMotionUpdates',
-		onClick : function() {
+		title: 'stopDeviceMotionUpdates',
+		onClick: () => {
 			logInApp('stopDeviceMotionUpdates');
 			deviceMotion.stopDeviceMotionUpdates();
 		}
 	}, {
-		title : 'getAttitudeReferenceFrame',
-		onClick : function() {
-			logInApp('getAttitudeReferenceFrame: ' + deviceMotion.getAttitudeReferenceFrame());
+		title: 'getAttitudeReferenceFrame',
+		onClick: () => {
+			logInApp('getAttitudeReferenceFrame: ' + deviceMotion.attitudeReferenceFrame);
 		}
 	}, {
-		title : 'availableAttitudeReferenceFrames',
-		onClick : function() {
+		title: 'availableAttitudeReferenceFrames',
+		onClick: () => {
 			var frames = deviceMotion.availableAttitudeReferenceFrames();
 			logInApp('availableAttitudeReferenceFrames: ' + frames);
 			if (frames & CoreMotion.ATTITUDE_REFERENCE_FRAME_X_MAGNETIC_NORTH_Z_VERTICAL) {
@@ -247,32 +247,32 @@ var data = [{
 			}
 		}
 	}, {
-		title : 'isDeviceMotionActive',
-		onClick : function() {
+		title: 'isDeviceMotionActive',
+		onClick: () => {
 			logInApp('isDeviceMotionActive: ' + deviceMotion.isDeviceMotionActive());
 		}
 	}, {
-		title : 'isDeviceMotionAvailable',
-		onClick : function() {
+		title: 'isDeviceMotionAvailable',
+		onClick: () => {
 			logInApp('isDeviceMotionAvailable: ' + deviceMotion.isDeviceMotionAvailable());
 		}
 	}, {
-		title : 'getDeviceMotion',
-		onClick : function() {
-			var motion = deviceMotion.getDeviceMotion();
+		title: 'getDeviceMotion',
+		onClick: () => {
+			const motion = deviceMotion.getDeviceMotion();
 			logInApp('getDeviceMotion ' + stringifyDeviceMotion(motion));
 		}
-	}]
+	} ]
 }, {
-	title : "Motion Activity",
-	items : [{
-		title : 'isActivityAvailable',
-		onClick : function() {
+	title: 'Motion Activity',
+	items: [ {
+		title: 'isActivityAvailable',
+		onClick: () => {
 			logInApp('isActivityAvailable: ' + motionActivity.isActivityAvailable());
 		}
 	}, {
-		title : 'startActivityUpdates(cb)',
-		onClick : function() {
+		title: 'startActivityUpdates(cb)',
+		onClick: () => {
 			logInApp('startActivityUpdates(cb): see device log');
 			motionActivity.startActivityUpdates(function(e) {
 				// This event object does not have success or error properties
@@ -280,72 +280,71 @@ var data = [{
 			});
 		}
 	}, {
-		title : 'stopActivityUpdates',
-		onClick : function() {
+		title: 'stopActivityUpdates',
+		onClick: () => {
 			logInApp('stopActivityUpdates');
 			motionActivity.stopActivityUpdates();
 		}
 	}, {
-		title : 'queryActivity',
-		onClick : function() {
+		title: 'queryActivity',
+		onClick: () => {
 			logInApp('queryActivity: see device log');
 			motionActivity.queryActivity({
-				start : new Date(new Date().getTime() - 60 * 60 * 1000), // 1 hr ago
-				end : new Date()
-			}, function(e) {
+				start: new Date(new Date().getTime() - 60 * 60 * 1000), // 1 hr ago
+				end: new Date()
+			}, (e) => {
 				if (!e.success) {
 					logInApp(stringifyError(e));
 					return;
 				}
 
-				var acts = e.activities;
+				const acts = e.activities;
 				Ti.API.info('Got ' + acts.length + ' activities');
-				for (var i = 0,
-				    j = acts.length; i < j; i++) {
+				for (let i = 0, j = acts.length; i < j; i++) {
 					Ti.API.info(stringifyMotionActivity(acts[i]));
 				}
 			});
 		}
-	}]
+	} ]
 }, {
-	title : "Pedometer",
-	items : [{
-		title : "isSupported",
-		onClick : function() {
-			logInApp("isSupported: " + pedometer.isSupported());
+	title: 'Pedometer',
+	items: [ {
+		title: 'isSupported',
+		onClick: () => {
+			logInApp('isSupported: ' + pedometer.isSupported());
 		}
 	}, {
-		title : "isCadenceAvailable",
-		onClick : function() {
-			logInApp("isCadenceAvailable: " + pedometer.isCadenceAvailable());
+		title: 'isCadenceAvailable',
+		onClick: () => {
+			logInApp('isCadenceAvailable: ' + pedometer.isCadenceAvailable());
 		}
 	}, {
-		title : "isDistanceAvailable",
-		onClick : function() {
-			logInApp("isDistanceAvailable: " + pedometer.isDistanceAvailable());
+		title: 'isDistanceAvailable',
+		onClick: () => {
+			logInApp('isDistanceAvailable: ' + pedometer.isDistanceAvailable());
 		}
 	}, {
-		title : "isFloorCountingAvailable",
-		onClick : function() {
-			logInApp("isFloorCountingAvailable: " + pedometer.isFloorCountingAvailable());
+		title: 'isFloorCountingAvailable',
+		onClick: () => {
+			logInApp('isFloorCountingAvailable: ' + pedometer.isFloorCountingAvailable());
 		}
 	}, {
-		title : "isPaceAvailable",
-		onClick : function() {
-			logInApp("isPaceAvailable: " + pedometer.isPaceAvailable());
+		title: 'isPaceAvailable',
+		onClick: () => {
+			logInApp('isPaceAvailable: ' + pedometer.isPaceAvailable());
 		}
 	}, {
-		title : "isStepCountingAvailable",
-		onClick : function() {
-			logInApp("isStepCountingAvailable: " + pedometer.isStepCountingAvailable());
+		title: 'isStepCountingAvailable',
+		onClick: () => {
+			logInApp('isStepCountingAvailable: ' + pedometer.isStepCountingAvailable());
 		}
 	}, {
-		title : 'startPedometerUpdates',
-		onClick : function() {
+		title: 'startPedometerUpdates',
+		onClick: () => {
 			logInApp('startPedometerUpdates');
 
 			pedometer.startPedometerUpdates({
-				start : new Date(new Date().getTime() - 60 * 60 * 1000) // 1 hr ago
+				start: new Date(new Date().getTime() - 60 * 60 * 1000) // 1 hr ago
 			}, function(e) {
 				if (!e.success) {
 					logInApp(stringifyError(e));
@@ -356,19 +355,19 @@ var data = [{
 			});
 		}
 	}, {
-		title : 'stopPedometerUpdates',
-		onClick : function() {
+		title: 'stopPedometerUpdates',
+		onClick: () => {
 			logInApp('stopPedometerUpdates');
 			pedometer.stopPedometerUpdates();
 		}
 	}, {
-		title : 'queryPedometerData',
-		onClick : function() {
+		title: 'queryPedometerData',
+		onClick: () => {
 			logInApp('queryPedometerData');
 
 			pedometer.queryPedometerData({
-				start : new Date(new Date().getTime() - 60 * 120 * 1000), // 2 hrs ago
-				end : new Date()
+				start: new Date(new Date().getTime() - 60 * 120 * 1000), // 2 hrs ago
+				end: new Date()
 			}, function(e) {
 				if (!e.success) {
 					logInApp(stringifyError(e));
@@ -378,12 +377,12 @@ var data = [{
 				Ti.API.info(stringifyPedometerData(e));
 			});
 		}
-	}]
+	} ]
 }, {
-	title : "Misc",
-	items : [{
-		title : 'Constants',
-		onClick : function() {
+	title: 'Misc',
+	items: [ {
+		title: 'Constants',
+		onClick: () => {
 			logInApp('Constants: see device log');
 
 			Ti.API.info('ERROR_NULL: ' + CoreMotion.ERROR_NULL);
@@ -409,8 +408,8 @@ var data = [{
 			Ti.API.info('MOTION_ACTIVITY_CONFIDENCE_MEDIUM: ' + CoreMotion.MOTION_ACTIVITY_CONFIDENCE_MEDIUM);
 			Ti.API.info('MOTION_ACTIVITY_CONFIDENCE_HIGH: ' + CoreMotion.MOTION_ACTIVITY_CONFIDENCE_HIGH);
 		}
-	}]
-}];
+	} ]
+} ];
 
 ////////////////////////////////////////////////////////
 // Utils
@@ -435,40 +434,39 @@ function stringifyMatrix(obj) {
 }
 
 function stringifyAttitude(obj) {
-	var props = ['roll', 'pitch', 'yaw'];
-	var str = stringifyObject(obj, props);
+	const props = ['roll', 'pitch', 'yaw'];
+	let str = stringifyObject(obj, props);
 
-	str = str + stringifyQuaternion(obj.quaternion);
-	str = str + stringifyMatrix(obj.rotationMatrix);
+	str += stringifyQuaternion(obj.quaternion);
+	str += stringifyMatrix(obj.rotationMatrix);
 
 	return str;
 }
 
 function stringifyObject(obj, properties) {
-	var str = '';
-	for (var i = 0,
-	    j = properties.length; i < j; i++) {
-		str = str + properties[i] + ': ' + obj[properties[i]] + ' ';
+	let str = '';
+	for (let i = 0, j = properties.length; i < j; i++) {
+		str += properties[i] + ': ' + obj[properties[i]] + ' ';
 	}
 	return str;
 }
 
 function stringifyDeviceMotion(motion) {
 
-	var str = '',
-	    timestamp = motion.timestamp,
-	    attitude = motion.attitude,
-	    rotationRate = motion.rotationRate,
-	    gravity = motion.gravity,
-	    userAcceleration = motion.userAcceleration,
-	    magneticField = motion.magneticField;
+	let str = '',
+		timestamp = motion.timestamp,
+		attitude = motion.attitude,
+		rotationRate = motion.rotationRate,
+		gravity = motion.gravity,
+		userAcceleration = motion.userAcceleration,
+		magneticField = motion.magneticField;
 
-	str = str + 'attitude: ' + stringifyAttitude(attitude);
-	str = str + 'rotationRate: ' + stringifyAxes(rotationRate);
-	str = str + 'gravity: ' + stringifyAxes(gravity);
-	str = str + 'userAcceleration: ' + stringifyAxes(userAcceleration);
-	str = str + 'magneticField ' + stringifyAxes(magneticField.field) + 'accuracy: ' + magneticField.accuracy;
-	str = str + ' timestamp: ' + timestamp;
+	str += 'attitude: ' + stringifyAttitude(attitude);
+	str += 'rotationRate: ' + stringifyAxes(rotationRate);
+	str += 'gravity: ' + stringifyAxes(gravity);
+	str += 'userAcceleration: ' + stringifyAxes(userAcceleration);
+	str += 'magneticField ' + stringifyAxes(magneticField.field) + 'accuracy: ' + magneticField.accuracy;
+	str += ' timestamp: ' + timestamp;
 
 	return str;
 }
@@ -485,86 +483,86 @@ function stringifyPedometerData(obj) {
 
 function errorCodeAsString(code) {
 	switch (code) {
-	case CoreMotion.ERROR_NULL:
-		return 'ERROR_NULL';
-	case CoreMotion.ERROR_DEVICE_REQUIRES_MOVEMENT:
-		return 'ERROR_DEVICE_REQUIRES_MOVEMENT';
-	case CoreMotion.ERROR_TRUE_NORTH_NOT_AVAILABLE:
-		return 'ERROR_TRUE_NORTH_NOT_AVAILABLE';
-	case CoreMotion.ERROR_UNKNOWN:
-		return 'ERROR_UNKNOWN';
-	case CoreMotion.ERROR_MOTION_ACTIVITY_NOT_AVAILABLE:
-		return 'ERROR_MOTION_ACTIVITY_NOT_AVAILABLE';
-	case CoreMotion.ERROR_MOTION_ACTIVITY_NOT_AUTHORIZED:
-		return 'ERROR_MOTION_ACTIVITY_NOT_AUTHORIZED';
-	case CoreMotion.ERROR_MOTION_ACTIVITY_NOT_ENTITLED:
-		return 'ERROR_MOTION_ACTIVITY_NOT_ENTITLED';
-	case CoreMotion.ERROR_INVALID_PARAMETER:
-		return 'ERROR_INVALID_PARAMETER';
-	default:
-		return '' + code;
+		case CoreMotion.ERROR_NULL:
+			return 'ERROR_NULL';
+		case CoreMotion.ERROR_DEVICE_REQUIRES_MOVEMENT:
+			return 'ERROR_DEVICE_REQUIRES_MOVEMENT';
+		case CoreMotion.ERROR_TRUE_NORTH_NOT_AVAILABLE:
+			return 'ERROR_TRUE_NORTH_NOT_AVAILABLE';
+		case CoreMotion.ERROR_UNKNOWN:
+			return 'ERROR_UNKNOWN';
+		case CoreMotion.ERROR_MOTION_ACTIVITY_NOT_AVAILABLE:
+			return 'ERROR_MOTION_ACTIVITY_NOT_AVAILABLE';
+		case CoreMotion.ERROR_MOTION_ACTIVITY_NOT_AUTHORIZED:
+			return 'ERROR_MOTION_ACTIVITY_NOT_AUTHORIZED';
+		case CoreMotion.ERROR_MOTION_ACTIVITY_NOT_ENTITLED:
+			return 'ERROR_MOTION_ACTIVITY_NOT_ENTITLED';
+		case CoreMotion.ERROR_INVALID_PARAMETER:
+			return 'ERROR_INVALID_PARAMETER';
+		default:
+			return '' + code;
 	}
 }
 
 ////////////////////////////////////////////////////////
 // UI
 ////////////////////////////////////////////////////////
-var win = Ti.UI.createWindow({
-	backgroundColor : 'white'
+const win = Ti.UI.createWindow({
+	backgroundColor: 'white'
 });
 
-var scrollView = Ti.UI.createScrollView({
-	top : 20,
-	bottom : '60%',
-	width : '100%',
-	borderWidth : '2',
-	borderColor : '#aaa',
-	color : '#000',
-	backgroundColor : '#FFF'
+const scrollView = Ti.UI.createScrollView({
+	top: 20,
+	bottom: '60%',
+	width: '100%',
+	borderWidth: '2',
+	borderColor: '#aaa',
+	color: '#000',
+	backgroundColor: '#FFF'
 });
-var textLog = Ti.UI.createLabel({
-	top : 0,
-	left : 5,
-	font : {
-		fontSize : 12
+const textLog = Ti.UI.createLabel({
+	top: 0,
+	left: 5,
+	font: {
+		fontSize: 12
 	},
-	text : 'AppLog: see the console log for more details'
+	text: 'AppLog: see the console log for more details'
 });
 
-var result = [];
+const result = [];
 
-for (var i = 0; i < data.length; i++) {
-	var rows = [];
+for (let i = 0; i < data.length; i++) {
+	const rows = [];
 
-	for (var k = 0; k < data[i].items.length; k++) {
-		var row = data[i].items[k];
+	for (let k = 0; k < data[i].items.length; k++) {
+		const row = data[i].items[k];
 
 		rows.push(Ti.UI.createTableViewRow({
-			title : row.title,
-			onClick : row.onClick || null
+			title: row.title,
+			onClick: row.onClick || null
 		}));
 	}
 
 	result.push(Ti.UI.createTableViewSection({
-		headerTitle : data[i].title || "",
-		rows : rows
+		headerTitle: data[i].title || '',
+		rows: rows
 	}));
 }
 
 table.setData(result);
 
-var scrollViewHeight;
-scrollView.addEventListener('postlayout', function() {
+let scrollViewHeight;
+scrollView.addEventListener('postlayout', () => {
 	scrollViewHeight = scrollView.rect.height;
 });
 // Scroll as more text is added to the log label
-textLog.addEventListener('postlayout', function() {
-	var sHeight = scrollViewHeight,
-	    tHeight = textLog.rect.height;
+textLog.addEventListener('postlayout', () => {
+	const sHeight = scrollViewHeight;
+	const tHeight = textLog.rect.height;
 	if (tHeight > sHeight) {
 		scrollView.setContentOffset({
-			x : 0,
-			y : tHeight - sHeight
+			x: 0,
+			y: tHeight - sHeight
 		}, false);
 	}
 });
@@ -580,9 +578,9 @@ function logInApp(text) {
 	textLog.text = textLog.text + '\n' + text;
 
 	// Tiny flash on every log to show changes
-	scrollView.setBorderColor("#f00");
-	setTimeout(function() {
-		scrollView.setBorderColor("#ccc");
+	scrollView.borderColor = '#f00';
+	setTimeout(() => {
+		scrollView.borderColor = '#ccc';
 	}, 100);
 
 	Ti.API.info(text);

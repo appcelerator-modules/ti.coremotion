@@ -1,6 +1,6 @@
 {
 	"name": "@titanium-sdk/ti.coremotion",
-	"version": "4.0.0",
+	"version": "4.0.1",
 	"description": "CoreMotion module for Titanium Mobile covering the iOS 7+ APIs of the CoreMotion framework.",
 	"scripts": {
 		"commit": "git-cz",

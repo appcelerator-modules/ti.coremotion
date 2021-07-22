@@ -110,7 +110,9 @@
   };
 
   return @{
-    @"heading" : NUMDOUBLE(deviceMotion.heading),
+#ifdef IS_XCODE_9
+    @"heading" : [TiUtils isIOSVersionOrGreater:@"11.0"] ? NUMDOUBLE(deviceMotion.heading) : NUMDOUBLE(-1),
+#endif
     @"timestamp" : (!deviceMotion) ? [NSNull null] : NUMDOUBLE([self intervalToMilliseconds:deviceMotion.timestamp]),
     @"attitude" : attitude,
     @"rotationRate" : rotationRate,

@@ -13,9 +13,11 @@
 
 - (NSNumber *)isSupported:(id)unused;
 
+#if IS_XCODE_9
 - (NSNumber *)authorizationStatus:(id)unused;
 
 - (NSNumber *)hasAltimeterPermissions:(id)unused;
+#endif
 
 - (NSNumber *)isRelativeAltitudeAvailable:(id)unused;
 
